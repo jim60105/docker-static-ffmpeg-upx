@@ -1,0 +1,3 @@
+[submodule "static-ffmpeg"]
+	path = static-ffmpeg
+	url = https://github.com/wader/static-ffmpeg.git
