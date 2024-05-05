@@ -21,7 +21,7 @@ runs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ghcr.io/${{ github.repository_owner }}/static-ffmpeg-upx
+        images: ${{ inputs.DOCKERHUB_USERNAME }}/static-ffmpeg-upx,ghcr.io/${{ github.repository_owner }}/static-ffmpeg-upx,quay.io/${{ github.repository_owner }}/static-ffmpeg-upx
         tags: |
           ${{ inputs.tag }}
           latest
