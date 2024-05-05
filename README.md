@@ -2,7 +2,7 @@
 
 [![CodeFactor](https://www.codefactor.io/repository/github/jim60105/docker-static-ffmpeg-upx/badge)](https://www.codefactor.io/repository/github/jim60105/docker-static-ffmpeg-upx)
 
-This is the [wader/static-ffmpeg](https://github.com/wader/static-ffmpeg) compressed with upx.
+This is the [wader/static-ffmpeg](https://github.com/wader/static-ffmpeg) compressed with [UPX](https://upx.github.io/).
 
 After UPX compression, the binary size is reduced to about _**26%**_.
 
