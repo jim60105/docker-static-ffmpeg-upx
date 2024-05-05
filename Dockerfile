@@ -1,14 +1,12 @@
 # syntax=docker/dockerfile:1
 ARG UID=1001
-ARG VERSION=EDGE
+ARG VERSION=latest
 ARG RELEASE=0
-
-ARG BUILD_VERSION=latest
 
 ########################################
 # Compress stage
 ########################################
-FROM mwader/static-ffmpeg:$BUILD_VERSION as ffmpeg
+FROM mwader/static-ffmpeg:$VERSION as ffmpeg
 
 FROM alpine:3.19 as compress
 
@@ -16,7 +14,6 @@ FROM alpine:3.19 as compress
 ARG TARGETARCH
 ARG TARGETVARIANT
 
-ARG BUILD_VERSION
 # Compress ffmpeg, ffprobe and dumb-init with upx
 RUN --mount=type=cache,id=apk-$TARGETARCH$TARGETVARIANT,sharing=locked,target=/var/cache/apk \
     --mount=from=ffmpeg,source=/ffmpeg,target=/tmp/ffmpeg,rw \
@@ -38,8 +35,6 @@ RUN --mount=type=cache,id=apk-$TARGETARCH$TARGETVARIANT,sharing=locked,target=/v
 # Final stage
 ########################################
 FROM scratch AS final
-
-ARG BUILD_VERSION
 
 COPY --link --chown=0:0 --chmod=775 --from=compress /ffmpeg /ffprobe /usr/bin/dumb-init /
 COPY --link --chown=0:0 --chmod=775 --from=ffmpeg /versions.json /
