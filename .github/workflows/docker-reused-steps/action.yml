@@ -3,6 +3,14 @@ name: Reusable docker workflow
 description: Reusable docker workflow.
 
 inputs:
+  DOCKERHUB_USERNAME:
+    required: true
+  DOCKERHUB_TOKEN:
+    required: true
+  QUAY_USERNAME:
+    required: true
+  QUAY_TOKEN:
+    required: true
   tag:
     required: true
 
@@ -24,6 +32,16 @@ runs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
+    # Create a Access Token and save it as as Actions secret
+    # https://hub.docker.com/settings/security
+    # DOCKERHUB_USERNAME
+    # DOCKERHUB_TOKEN
+    - name: Login to DockerHub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ inputs.DOCKERHUB_USERNAME }}
+        password: ${{ inputs.DOCKERHUB_TOKEN }}
+
     # You may need to manage write and read access of GitHub Actions for repositories in the container settings.
     - name: Login to GitHub Container Registry
       uses: docker/login-action@v3
@@ -31,6 +49,13 @@ runs:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ github.token }}
+
+    - name: Login to Quay Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: quay.io
+        username: ${{ inputs.QUAY_USERNAME }}
+        password: ${{ inputs.QUAY_TOKEN }}
 
     - name: Build and push
       uses: docker/build-push-action@v5

@@ -38,4 +38,8 @@ jobs:
       - name: Build docker
         uses: ./.github/workflows/docker-reused-steps
         with:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
+          QUAY_TOKEN: ${{ secrets.QUAY_TOKEN }}
           tag: ${{ github.ref_name }}
