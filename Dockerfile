@@ -1,5 +1,4 @@
 # syntax=docker/dockerfile:1
-ARG UID=1001
 ARG VERSION=latest
 ARG RELEASE=0
 
