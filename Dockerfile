@@ -7,7 +7,7 @@ ARG RELEASE=0
 ########################################
 FROM mwader/static-ffmpeg:$VERSION as ffmpeg
 
-FROM alpine:3.19 as compress
+FROM alpine:3 as compress
 
 # RUN mount cache for multi-arch: https://github.com/docker/buildx/issues/549#issuecomment-1788297892
 ARG TARGETARCH
